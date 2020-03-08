@@ -1,0 +1,188 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="background-color:#add8e6 ">
+{% block title %} <Title>Book Treasure</Title> {% endblock title %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="{% url 'BookStore:index'%}"><strong>BookTreasure</strong></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'BookStore:library' %}"><strong>Library</strong><span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'BookStore:blog' %}"><strong>Blog</strong><span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline mr-auto my-3 my-lg-0" action="{% url 'BookStore:search' %}">
+      <input class="form-control mr-sm-2 " type="search" placeholder="book title or author" name="search_value">
+      <button class="btn btn-outline-dark my-2 my-sm-0 btn-sm" type="submit">Search</button>
+    </form>
+
+    <ul class="navbar-nav nav-right my-5 my-sm-0">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'carts:cart_home' %}">
+                <button class="btn btn-outline-dark my-2 my-sm-0 btn-sm"><i class="fa fa-shopping-cart"></i> cart</button>
+            </a>
+        </li>
+
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        {% if user.first_name %}
+        <a class="nav-link text-white" href="{% url 'accounts:profile' user.id %}"><strong>{{user.first_name}}</strong></a>
+        {% else %}
+        <a class="nav-link text-white" href="{% url 'admin:index' %}"><strong>Hello, User </strong></a>
+        {% endif %}
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'accounts:logout' %}"><strong>Logout</strong></a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'accounts:register' %}"><strong>Register</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'accounts:login' %}"><strong>Login</strong></a>
+      </li>
+      {% endif %}
+
+    </ul>
+  </div>
+</nav>
+{% endblock navbar %}
+
+
+{% block content %}
+<div class="container">
+<div class="row">
+    <div class="leftcolumn">
+      {% block sidebar_main %}
+      {% for post in posts %}
+      <div class="card">
+        <h2>{{post.title}}</h2>
+        <h5>Title description, Dec 7, 2017</h5>
+        <img src="{{post.img.url}}" style=" max-width: 100% ">Image</img>
+        <p>Some text..</p>
+        <p>{{post.content}}</p>
+      </div>
+      {% endfor %}
+      {% endblock sidebar_main %}
+    </div>
+
+    {% block sidebar_right %}
+    <div class="rightcolumn">
+      {% block sidebar_right_card %}
+      <div class="card">
+        <h2>About Me</h2>
+        <div class="fakeimg" style="height:100px;">Image</div>
+        <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+      </div>
+      {% endblock sidebar_right_card %}
+
+      <div class="card">
+        <h2>Add two numbers</h2>
+        <form action="add" method="post">
+          {% csrf_token %}
+          Enter 1st Number : <input type="text" name="n1"><br>
+          Enter 2nd Number : <input type="text" name="n2"><br>
+          <input type="submit">
+        </form>
+        {% block result %}
+        Result : {{result}}
+        {% endblock result%}
+      </div>
+
+      <div class="card">
+        <h3>Popular Post</h3>
+        <div class="fakeimg">
+          <p>Image</p>
+        </div>
+        <div class="fakeimg">
+          <p>Image</p>
+        </div>
+        <div class="fakeimg">
+          <p>Image</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Follow Me</h3>
+        <p>Some text..</p>
+      </div>
+    </div>
+    {% endblock sidebar_right %}
+  </div>
+  </div>
+{% endblock content %}
+
+{% block footer %}
+<div class="footer bg-primary" style="color:white">
+  <footer class="bg3 p-t-75 p-b-32 " style="padding-top: 10px">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Categories
+					</h4>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Help
+					</h4>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						<a href="{% url 'ecommerce:contact_page' %}" class="contact_page text-light"> Contact Form</a>
+					</h4>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Newsletter
+					</h4>
+
+					<form>
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+								Subscribe
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="p-t-40">
+
+				<p class="stext-107 cl6 txt-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                <h5>Copyright 2020 All rights reserved by BookTreasure.</h5>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+				</p>
+			</div>
+		</div>
+	</footer>
+</div>
+{% endblock footer %}
+</body>
+
+</html>

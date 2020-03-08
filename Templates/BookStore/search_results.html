@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+ {% block title %} <title>Search Results</title>{% endblock title %}
+  {% if results %}
+    {% for book in results %}
+        <div class="container" style="padding-top: 10px;">
+        	<div class="row bg-light" style="padding: 10px">
+               <div class="col-2  item-photo">
+                    <img style="max-width:100%;" src="{{book.book_cover.url}}" />
+                </div>
+                <div class="col-6" style="border:0px solid gray">
+                    <h4>{{book.book_title}}</h4>
+                    <div class="section" style="padding-top:20px;">
+                        <button class="btn btn-dark"><a href="{% url 'BookStore:book_details' book.id %}" style="text-color:white"> More Details </a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+  {% else %}
+    <div class="container" style="padding: 20px">
+        <div class="row">
+            <div></div><h2>कृपया औकात में रहकर सर्च करें। </h2></div>
+            <h2>Thank you!</h2>
+   {% endif %}
+
+
+{% endblock content %}
+{% block footer %}
+{% endblock footer %}

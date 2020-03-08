@@ -1,0 +1,7 @@
+elif request.user != "AnonymousUser" and request.user.is_authenticated and self.get_queryset().filter(
+        #         user=request.user).first() is not None:
+        #     new_obj = False
+        #     cart_obj = self.get_queryset().filter(user=request.user).first()
+        #     request.session['cart_id'] = cart_obj.id
+        #     cart_obj.user = request.user
+        #     cart_obj.save()

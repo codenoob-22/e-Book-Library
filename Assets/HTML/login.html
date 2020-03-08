@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+<title>Login</title>
+{% endblock title %}
+
+{% block content %}
+  <h2>Login</h2>
+  <div class="loginCard">
+    <form action="/action_page.php" method="POST">
+      <div class="imgcontainer">
+        <img src="../Images/login_male.png" alt="Avatar" class="avatar">
+      </div>
+
+      <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <button type="submit">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+          <p>Don't have an account? <a href="signup.htm" style="color:dodgerblue">Sign Up</a>.</p>
+        </label>
+      </div>
+
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+    </form>
+  </div>
+{% block content %}

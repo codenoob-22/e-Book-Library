@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+<title>User Profile</title>
+{% endblock title %}
+
+{% block content%}
+<div class="container " style="padding: 20px;">
+    <div class="row bg-light" style="padding: 20px">
+        <div class="col-2 item-photo">
+            <img style="max-width:100%;" src="{% static 'Images/login_male.png' %}" alt="Profile Picture is not available"/>
+        </div>
+        <div class="col-6" style="border:0px solid gray">
+            <a>Name: {{user.first_name}} {{user.last_name}}</a><br>
+            <a>Username: {{user.username}}</a><br>
+            <a>Email ID: {{user.email}}</a>
+        </div>
+    </div>
+</div>
+{% endblock content%}
+
+{% block footer%}
+{% endblock footer%}

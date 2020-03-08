@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+ {% block title %} <title>Details page: {{book.book_title}}</title>{% endblock title %}
+
+        <div class="container" style="padding: 20px">
+        	<div class="row">
+               <div class="col-4 item-photo">
+                    <img style="max-width:100%;" src="{{book.book_cover.url}}" />
+                </div>
+                <div class="col-6" style="border:0px solid gray">
+
+                    <h3>{{book.book_title}}</h3>
+                    <h5 style="color:#337ab7">{{book.book_subtitle}} <a href="#">{{book.author_name}}</a></h5>
+
+                    <div class="section" style="padding-top:20px;">
+                        <button class="btn btn-dark"><a href="{% url 'BookStore:bookreader' book.id %}" style="text-color:white"> Read NOW </a></button>
+                        <form method="POST" action="{% url 'carts:add_to_cart' %}" class="form">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ book.id }}">
+                                <button type="submit" class="btn btn-link bg-success text-light">Add to cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}
