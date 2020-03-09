@@ -10,26 +10,38 @@ class CartManager(models.Manager):
     def new_or_get(self, request):
         cart_id = request.session.get("cart_id", None)
         qs = self.get_queryset().filter(id=cart_id)
+        print('me abhi CartManager me hu')
         print(qs)
         if qs.count() == 1:
+            print('me abhi chutiya hu')
             new_obj = False
             cart_obj = qs.first()
             if request.user.is_authenticated and cart_obj.user is None:
+                print('me abhi if me hu')
+                if self.get_queryset().filter(user=request.user).first() is not None:
+                    print('me abhi if ke if me hu')
+                    cart_obj1 = self.get_queryset().filter(user=request.user).first()
+                    for item in cart_obj.products.all():
+                        cart_obj1.products.add(item)
+                    cart_obj.delete()
+                    cart_obj = self.get_queryset().filter(user=request.user).first()
+                    request.session['cart_id'] = cart_obj.id
                 cart_obj.user = request.user
                 cart_obj.save()
         elif request.user.is_authenticated and self.get_queryset().filter(user=request.user).first() is not None:
             new_obj = False
+            print('me abhi elif me hu')
             cart_obj = self.get_queryset().filter(user=request.user).first()
             request.session['cart_id'] = cart_obj.id
             cart_obj.user = request.user
             cart_obj.save()
         else:
-            cart_obj = Cart.new(user=request.user)
+            cart_obj = self.new_cart(user=request.user)
             new_obj = True
             request.session['cart_id'] = cart_obj.id
         return cart_obj, new_obj
 
-    def new(self, user=None):
+    def new_cart(self, user=None):
         print(user)
         user_obj = None
         if user is not None:

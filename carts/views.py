@@ -1,6 +1,5 @@
-
-
 from django.shortcuts import render, redirect
+
 from BookStore.models import Book
 from .models import Cart
 
@@ -19,7 +18,8 @@ def cart_home(request):
 
 
 def add_to_cart(request):
-    product_id = request.POST.get('product_id')
+    product_id = str(request.POST.get('product_id'))
+    print(product_id)
     product_obj = Book.objects.get(id=product_id)
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     if product_obj not in cart_obj.products.all():
@@ -31,6 +31,6 @@ def remove_from_cart(request):
     product_id = request.POST.get('product_id')
     product_obj = Book.objects.get(id=product_id)
     cart_obj, new_obj = Cart.objects.new_or_get(request)
-    if product_obj in cart_obj.products.all():
+    if product_obj in cart_obj.objects.all():
         cart_obj.products.remove(product_obj)
     return redirect("carts:cart_home")

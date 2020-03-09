@@ -20,7 +20,7 @@
                         <button class="btn btn-dark"><a href="{% url 'BookStore:bookreader' book.id %}" style="text-color:white"> Read NOW </a></button>
                         <form method="POST" action="{% url 'carts:add_to_cart' %}" class="form">
                                 {% csrf_token %}
-                                <input type="hidden" name="product_id" value="{{ book.id }}">
+                                <input type="hidden" name="product_id" value="{{book.id}}">
                                 <button type="submit" class="btn btn-link bg-success text-light">Add to cart</button>
                         </form>
                     </div>
