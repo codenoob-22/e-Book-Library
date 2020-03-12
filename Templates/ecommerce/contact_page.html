@@ -8,7 +8,7 @@
 {% block content %}
 
 <div class="container" style="padding-top:20px">
-    <h3>Contact form:</h3>
+    <h3>Your query:</h3>
     <form class="form col-4" action="{% url 'ecommerce:contact_page' %}" method="POST">
         {% csrf_token %}
         {{ form }}

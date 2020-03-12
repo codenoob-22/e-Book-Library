@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>Book Store</title>
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'CSS/storepage.css' %}">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<body style="background-color: pink">
+
+{% if my_library.books.all %}
+<div class="container">
+    <h3 class="h3 ss" style="text-color:navy">My Library [ {{my_library.books.count}} <a class="fa fa-book"> ]</a></h3>
+    <div class="row">
+        {% for book in my_library.books.all %}
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-1">
+            <div class="product-grid mt-2 mb-2">
+                <div class="product-image">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" style="border-radius: 5%; object-fit: cover" src="{{book.book_cover_thumbnail.url}}">
+                    </a>
+                </div>
+                 <form method="POST" action="{% url 'mylibrary:remove_from_my_library' %}" class="form">
+                    {% csrf_token %}
+                     <input type="hidden" name="book_id" value="{{book.id}}">
+                     <button type="submit" class="btn btn-link bg-danger text-light btn-sm" style="float:left">Remove</button>
+                     <button type="button" class="btn btn-link bg-success btn-sm" style="float:right"><a href="{% url 'BookStore:bookreader' book.id %}" style="color:white">Read now</a></button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+    <div class="container" style="padding: 20px">
+        <div class="row">
+            <div></div><h4>There is no book in your library.</h4>
+        </div>
+        <button class=" btn bg-success text-light"><a class="text-light"href="{% url 'BookStore:library' %}">Find new books</a></button>
+    </div>
+   {% endif %}
+</body>
+{% endblock content %}

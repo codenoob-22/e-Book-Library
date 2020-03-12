@@ -10,16 +10,16 @@ class CartManager(models.Manager):
     def new_or_get(self, request):
         cart_id = request.session.get("cart_id", None)
         qs = self.get_queryset().filter(id=cart_id)
-        print('me abhi CartManager me hu')
-        print(qs)
+        # print('me abhi CartManager me hu')
+        # print(qs)
         if qs.count() == 1:
-            print('me abhi chutiya hu')
+            # print('me abhi chutiya hu')
             new_obj = False
             cart_obj = qs.first()
             if request.user.is_authenticated and cart_obj.user is None:
-                print('me abhi if me hu')
+                # print('me abhi if me hu')
                 if self.get_queryset().filter(user=request.user).first() is not None:
-                    print('me abhi if ke if me hu')
+                    # print('me abhi if ke if me hu')
                     cart_obj1 = self.get_queryset().filter(user=request.user).first()
                     for item in cart_obj.products.all():
                         cart_obj1.products.add(item)
@@ -30,7 +30,7 @@ class CartManager(models.Manager):
                 cart_obj.save()
         elif request.user.is_authenticated and self.get_queryset().filter(user=request.user).first() is not None:
             new_obj = False
-            print('me abhi elif me hu')
+            # print('me abhi elif me hu')
             cart_obj = self.get_queryset().filter(user=request.user).first()
             request.session['cart_id'] = cart_obj.id
             cart_obj.user = request.user

@@ -6,26 +6,23 @@
 {% endblock title %}
 
 {% block content %}
-
 <link rel="stylesheet" href="{% static 'CSS/storepage.css' %}">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-
 <body style="background-color: pink">
-
 
 <div class="container">
     <h3 class="h3 ss" style="text-color:navy"><u>Inspired by your interest</u></h3>
     <div class="row">
         {% for book in books %}
         <div class="col-md-2 col-sm-4">
-            <div class="product-grid bg-success" style="height:100%" >
+            <div class="product-grid mt-2 mb-2" style="height:100%; border-radius: 5%" >
                 <div class="product-image">
-                    <a href="{% url 'BookStore:book_details' book.id %}">
-                        <img class="pic-1" src="{{book.book_cover.url}}">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" src="{{book.book_cover_thumbnail.url}}">
                     </a>
                     <span class="product-new-label"></span>
                     <span class="product-discount-label"></span>
@@ -42,10 +39,10 @@
     <div class="row">
         {% for book in latest_books %}
         <div class="col-md-2 col-sm-4">
-            <div class="product-grid bg-success" style="height:100%" >
+            <div class="product-grid mt-2 mb-2" style="height:100%; border-radius: 5%" >
                 <div class="product-image">
-                    <a href="{% url 'BookStore:book_details' book.id %}">
-                        <img class="pic-1" src="{{book.book_cover.url}}">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" src="{{book.book_cover_thumbnail.url}}">
                     </a>
                     <span class="product-new-label"></span>
                     <span class="product-discount-label"></span>
@@ -62,10 +59,10 @@
     <div class="row">
         {% for book in books %}
         <div class="col-md-2 col-sm-4">
-            <div class="product-grid bg-success" style="height:100%" >
+            <div class="product-grid mt-2 mb-2" style="height:100%; border-radius: 5%" >
                 <div class="product-image">
-                    <a href="{% url 'BookStore:book_details' book.id %}">
-                        <img class="pic-1" src="{{book.book_cover.url}}">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" src="{{book.book_cover_thumbnail.url}}">
                     </a>
                     <span class="product-new-label"></span>
                     <span class="product-discount-label"></span>
@@ -81,10 +78,10 @@
     <div class="row">
         {% for book in books %}
         <div class="col-md-2 col-sm-4">
-            <div class="product-grid bg-success" style="height:100%" >
+            <div class="product-grid mt-2 mb-2" style="height:100%; border-radius: 5%" >
                 <div class="product-image">
-                    <a href="{% url 'BookStore:book_details' book.id %}">
-                        <img class="pic-1" src="{{book.book_cover.url}}">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" src="{{book.book_cover_thumbnail.url}}">
                     </a>
                     <span class="product-new-label"></span>
                     <span class="product-discount-label"></span>
@@ -101,10 +98,10 @@
     <div class="row">
         {% for book in books %}
         <div class="col-md-2 col-sm-4">
-            <div class="product-grid bg-success" style="height:100%" >
+            <div class="product-grid mt-2 mb-2" style="height:100%; border-radius: 5%" >
                 <div class="product-image">
-                    <a href="{% url 'BookStore:book_details' book.id %}">
-                        <img class="pic-1" src="{{book.book_cover.url}}">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" src="{{book.book_cover_thumbnail.url}}">
                     </a>
                     <span class="product-new-label"></span>
                     <span class="product-discount-label"></span>
@@ -119,11 +116,12 @@
     <h3 class="h3"style="text-color:navy"><u>miscellaneous Books</u></h3>
     <div class="row">
         {% for book in books %}
+
         <div class="col-md-2 col-sm-4">
-            <div class="product-grid bg-success" style="height:100%" >
+            <div class="product-grid mt-2 mb-2" style="height:100%;border-radius: 5%; " >
                 <div class="product-image">
-                    <a href="{% url 'BookStore:book_details' book.id %}">
-                        <img class="pic-1" src="{{book.book_cover.url}}">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" src="{{book.book_cover_thumbnail.url}}">
                     </a>
                     <span class="product-new-label"></span>
                     <span class="product-discount-label"></span>
@@ -133,9 +131,5 @@
         {% endfor %}
     </div>
 </div>
-
-
 </body>
-
-
 {% endblock content %}

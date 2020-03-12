@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>Checkout</title>
+{% endblock title %}
+{% block content %}
+        <div class="container" style="padding-top: 10px;">
+
+        	<div class="row bg-light" style="padding: 10px">
+                <h2>Checkout</h2><br>
+            </div>
+            <div class="row bg-light" style="padding: 10px">
+                <p>Cart Total : {{ order.cart_total }}</p><br>
+            </div>
+            <div class="row bg-light" style="padding: 10px">
+                <p>Shipping Total : {{ order.shipping_total }}</p><br>
+            </div>
+            <div class="row bg-light" style="padding: 10px">
+                <p>Order Total : {{ order.total }}</p><br>
+            </div>
+        </div>
+{% endblock content %}

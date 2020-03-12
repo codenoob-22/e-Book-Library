@@ -8,8 +8,8 @@
      {% if cart.products.all %}
         <div class="container" style="padding-top: 10px;">
             <h2>YOUR CART :</h2>
-        	<div class="row bg-light" style="padding: 10px;">
-                <table class="table">
+        	<div class="row bg-light" style="padding: 10px">
+                <table class="table table-responsive"style="max-width:100%">
                     <tr class="table_header">
                         <th class="column-0">#</th>
                         <th class="column-1">Image</th>
@@ -26,7 +26,7 @@
                         <td class="column-0"> {{forloop.counter}} </td>
                         <td class="column-1" ><div><img style="max-height:80px" src="{{product.book_cover.url}}" /></div></td>
                         <td class="column-2 "><a href="{% url 'BookStore:book_details' product.id %}">{{product.book_title}}</a> </td>
-                        <td class="column-3">${{product.book_price}} </td>
+                        <td class="column-3">$ {{product.book_price}} </td>
                         <td class="column-4">
                             <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                 <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
@@ -38,12 +38,12 @@
                             </div>
                         </td>
                         </td>
-                        <td class="column-5">${{product.book_price}}</td>
+                        <td class="column-5">$ {{product.book_price}}</td>
                         <td class="column-6">
                             <form method="POST" action="{% url 'carts:remove_from_cart' %}" class="form">
                                 {% csrf_token %}
-                                <input type="hidden" name="product_id" value="{{ product.id }}">
-                                <button type="submit" class="btn btn-link">Remove</button>
+                                <input type="hidden" name="book_id" value="{{ book.id }}">
+                                <button type="submit" class="btn btn-link text-danger">Remove</button>
                             </form>
                         </td>
                     </tr>
@@ -54,7 +54,8 @@
                         <td class="column-3"></td>
                         <td class="column-5"></td>
                         <td class="column-4">Total Amount </td>
-                        <td class="column-6">${{cart.total}} </td>
+                        <td class="column-6">$ {{cart.total}} </td>
+                        <td class="column-5"><button type="button" class="btn btn-link bg-success"><a href="#" style="color:white"> Checkout</a></button></td>
                     </tr>
                 </table>
             </div>

@@ -8,20 +8,20 @@
 
         <div class="container" style="padding: 20px">
         	<div class="row">
-               <div class="col-4 item-photo">
-                    <img style="max-width:100%;" src="{{book.book_cover.url}}" />
+               <div class="col-lg-4 col-sm-6 col-md-4 item-photo">
+                    <img style="max-width:100%; border-radius: 2%" src="{{book.book_cover.url}}" />
                 </div>
                 <div class="col-6" style="border:0px solid gray">
 
-                    <h3>{{book.book_title}}</h3>
-                    <h5 style="color:#337ab7">{{book.book_subtitle}} <a href="#">{{book.author_name}}</a></h5>
+                    <h4 class="text-primary">Title: {{book.book_title}}</h4>
+                    <h5 style="color:#337ab7"> Sub-title: {{book.book_subtitle}}<br>Author: <a href="#">{{book.author_name}}</a></h5>
 
                     <div class="section" style="padding-top:20px;">
-                        <button class="btn btn-dark"><a href="{% url 'BookStore:bookreader' book.id %}" style="text-color:white"> Read NOW </a></button>
-                        <form method="POST" action="{% url 'carts:add_to_cart' %}" class="form">
-                                {% csrf_token %}
-                                <input type="hidden" name="product_id" value="{{book.id}}">
-                                <button type="submit" class="btn btn-link bg-success text-light">Add to cart</button>
+                        <form method="POST" action="{% url 'mylibrary:add_to_my_library' %}" class="form">
+                            {% csrf_token %}
+                            <input type="hidden" name="book_id" value="{{book.id}}">
+                            <button class="btn btn-success btn-sm"><a href="{% url 'BookStore:BookReaderSlugView' book.slug %}" class="text-light">Read now</a></button>
+                            <button type="submit" class="btn btn-link bg-success text-light fa fa-plus"> My Library</button>
                         </form>
                     </div>
                 </div>
