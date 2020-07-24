@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>{{title}}</title>
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'CSS/storepage.css' %}">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<body style="background-color: pink">
+{% if category.all %}
+<div class="container" style="padding-top: 20px; min-height: 510px">
+    <h4>{{title}} [ {{category.count}} <a class="fa fa-book"> ]</a></h4>
+    <div class="row">
+        {% for book in category.all %}
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-1">
+            <div class="product-grid mt-2 mb-2">
+                <div class="product-image">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" style="border-radius: 5%; object-fit: cover" src="{{book.book_cover_thumbnail.url}}">
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+    <div class="container" style="padding: 20px;min-height: 510px">
+        <div class="row">
+            <div></div><h4>There is no book of this category.</h4>
+        </div>
+        <button class=" btn bg-success text-light"><a class="text-light"href="{% url 'BookStore:library' %}">Find other books</a></button>
+    </div>
+{% endif %}
 </body>
-</html>
+{% endblock content %}

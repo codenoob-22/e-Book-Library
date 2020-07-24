@@ -9,7 +9,7 @@
 
 <div class="container" style="padding-top:20px">
     <h3>Your query:</h3>
-    <form class="form col-4" action="{% url 'ecommerce:contact_page' %}" method="POST">
+    <form class="form col-lg-4 col-md-6 col-sm-12" action="{% url 'ecommerce:contact_page' %}" method="POST">
         {% csrf_token %}
         {{ form }}
         <button type="submit">Send Message</button>

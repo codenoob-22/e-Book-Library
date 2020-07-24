@@ -8,6 +8,15 @@ app_name = 'BookStore'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('textbooks/', views.textbooks, name='textbooks'),
+    path('latest_books/', views.latest_books, name='latest_books'),
+    path('fictions/', views.fictions, name='fictions'),
+    path('non-fictions/', views.non_fictions, name='non_fictions'),
+    path('stories/', views.stories, name='stories'),
+    path('poetry/', views.poetry, name='poetry'),
+    path('novels/', views.novels, name='novels'),
+    path('other/', views.other, name='other'),
+
     path('add', views.add, name='add'),
     path('library/', views.library, name='library'),
     path('blog/', views.blog, name='blog'),

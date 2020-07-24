@@ -14,35 +14,42 @@
 </head>
 
 <body style="background-color:#add8e6 ">
-{% block title %} <Title>REGARGO BOOKS</Title> {% endblock title %}
+{% block title %} <Title>E-Books Library</Title> {% endblock title %}
 
 {% block navbar %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-  <a class="navbar-brand" href="{% url 'BookStore:index'%}"><strong>RegargoBooks</strong></a>
+  <a class="navbar-brand" href="{% url 'BookStore:index'%}"><strong>E-Books Library</strong></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link text-white" href="{% url 'BookStore:library' %}"><strong>Library</strong><span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
-        <li class="nav-item">
-            <a class="nav-link text-white" href="#"><strong>Categories</strong><span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'BookStore:blog' %}"><strong>Blog</strong><span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                  <strong>Categories</strong>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'BookStore:fictions'%}">Fiction</a>
+                  <a class="dropdown-item" href="{% url 'BookStore:non_fictions'%}">Non-fiction</a>
+                  <a class="dropdown-item" href="{% url 'BookStore:poetry'%}">Poetry</a>
+                  <a class="dropdown-item" href="{% url 'BookStore:stories'%}">Story</a>
+                  <a class="dropdown-item" href="{% url 'BookStore:novels'%}">Novels</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'BookStore:textbooks'%}">Text-books</a>
+                  <a class="dropdown-item" href="{% url 'BookStore:other'%}">Miscellaneous Books</a>
+              </div>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link text-white" href="{% url 'ecommerce:contact_page' %}"><strong>Contact Us</strong><span class="sr-only">(current)</span></a>
-        </li>
-    </ul>
-    <form class="form-inline mr-auto my-3 my-lg-0" action="{% url 'BookStore:search' %}">
-      <input class="form-control mr-sm-2 " type="search" placeholder="book title or author" name="search_value">
-      <button class="btn btn-outline-dark my-2 my-sm-0 btn-md fa fa-search" type="submit"> Search</button>
-    </form>
+          </li>
+      </ul>
+      <form class="form-inline mr-auto my-3 my-lg-0" action="{% url 'BookStore:search' %}">
+          <input class="form-control mr-sm-2 " type="search" placeholder="book title or author" name="search_value">
+          <button class="btn btn-outline-dark my-2 my-sm-0 btn-md fa fa-search" type="submit"> Search</button>
+      </form>
 
     <ul class="navbar-nav nav-right my-5 my-sm-0">
 
@@ -150,7 +157,7 @@
 {% block footer %}
   <footer class="footer bg-primary text-light">
       <p class="stext-107 cl6 txt-center m-2">
-      <h5>Copyright 2020 All rights reserved by BookTreasure.</h5>
+      <h5>Copyright 2020 All rights reserved. Developer: Hariram Regar(IIT Kanpur)</h5>
       </p>
   </footer>
 {% endblock footer %}

@@ -13,9 +13,9 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <body style="background-color: pink">
-
+{% if interested_books %}
 <div class="container">
-    <h3 class="h3 ss" style="text-color:navy"><u>Inspired by your interest</u></h3>
+    <h3 class="h3 ss" style="text-color:navy"><u><a href="{% url 'BookStore:interested_books'%}">Inspired by your interest</a></u></h3>
     <div class="row">
         {% for book in books %}
         <div class="col-md-2 col-sm-4">
@@ -32,10 +32,12 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
 
 
+{% if latest_books %}
 <div class="container">
-    <h3 class="h3 ss"style="text-color:navy"><u>Latest books</u></h3>
+    <h3 class="h3 ss"style="text-color:navy"><u><a href="{% url 'BookStore:latest_books'%}">Latest Books</a></u></h3>
     <div class="row">
         {% for book in latest_books %}
         <div class="col-md-2 col-sm-4">
@@ -52,12 +54,13 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
 
-
+{% if textbooks %}
 <div class="container">
-    <h3 class="h3 ss" style="text-color:navy"><u>Text books</u></h3>
+    <h3 class="h3 ss" style="text-color:navy"><u><a href="{% url 'BookStore:textbooks'%}">Text books</a></u></h3>
     <div class="row">
-        {% for book in books %}
+        {% for book in textbooks %}
         <div class="col-md-2 col-sm-4">
             <div class="product-grid mt-2 mb-2" style="height:100%; border-radius: 5%" >
                 <div class="product-image">
@@ -72,11 +75,13 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
 
+{% if fictions %}
 <div class="container">
-    <h3 class="h3 ss"style="text-color:navy"><u>Non-Fiction Books</u></h3>
+    <h3 class="h3 ss"style="text-color:navy"><u><a href="{% url 'BookStore:fictions'%}">Fiction Books</a></u></h3>
     <div class="row">
-        {% for book in books %}
+        {% for book in fictions %}
         <div class="col-md-2 col-sm-4">
             <div class="product-grid mt-2 mb-2" style="height:100%; border-radius: 5%" >
                 <div class="product-image">
@@ -91,12 +96,13 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
 
-
+{% if non_fictions %}
 <div class="container">
-    <h3 class="h3" style="text-color:navy"><u>Fiction Books</u></h3>
+    <h3 class="h3" style="text-color:navy"><u><a href="{% url 'BookStore:non_fictions'%}">Non-Fiction Books</a></u></h3>
     <div class="row">
-        {% for book in books %}
+        {% for book in non_fictions %}
         <div class="col-md-2 col-sm-4">
             <div class="product-grid mt-2 mb-2" style="height:100%; border-radius: 5%" >
                 <div class="product-image">
@@ -111,12 +117,55 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
 
+{% if stories %}
 <div class="container">
-    <h3 class="h3"style="text-color:navy"><u>miscellaneous Books</u></h3>
+    <h3 class="h3" style="text-color:navy"><u><a href="{% url 'BookStore:stories'%}">Story Books</a></u></h3>
     <div class="row">
-        {% for book in books %}
+        {% for book in stories %}
+        <div class="col-md-2 col-sm-4">
+            <div class="product-grid mt-2 mb-2" style="height:100%; border-radius: 5%" >
+                <div class="product-image">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" src="{{book.book_cover_thumbnail.url}}">
+                    </a>
+                    <span class="product-new-label"></span>
+                    <span class="product-discount-label"></span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
+{% if poetry %}
+<div class="container">
+    <h3 class="h3" style="text-color:navy"><u><a href="{% url 'BookStore:poetry'%}">Poetry Books</a></u></h3>
+    <div class="row">
+        {% for book in poetry %}
+        <div class="col-md-2 col-sm-4">
+            <div class="product-grid mt-2 mb-2" style="height:100%; border-radius: 5%" >
+                <div class="product-image">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" src="{{book.book_cover_thumbnail.url}}">
+                    </a>
+                    <span class="product-new-label"></span>
+                    <span class="product-discount-label"></span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% if novels %}
+<div class="container">
+    <h3 class="h3"style="text-color:navy"><u><a href="{% url 'BookStore:novels'%}">Novel Books</a></u></h3>
+    <div class="row">
+        {% for book in novels %}
         <div class="col-md-2 col-sm-4">
             <div class="product-grid mt-2 mb-2" style="height:100%;border-radius: 5%; " >
                 <div class="product-image">
@@ -131,5 +180,28 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
+
+{% if other %}
+<div class="container">
+    <h3 class="h3"style="text-color:navy"><u><a href="{% url 'BookStore:other'%}">Miscellaneous Books</a></u></h3>
+    <div class="row">
+        {% for book in other %}
+        <div class="col-md-2 col-sm-4">
+            <div class="product-grid mt-2 mb-2" style="height:100%;border-radius: 5%; " >
+                <div class="product-image">
+                    <a href="{% url 'BookStore:BookDetailSlugView' book.slug %}">
+                        <img class="pic-1" src="{{book.book_cover_thumbnail.url}}">
+                    </a>
+                    <span class="product-new-label"></span>
+                    <span class="product-discount-label"></span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
 </body>
 {% endblock content %}

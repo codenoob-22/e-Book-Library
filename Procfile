@@ -1,0 +1,1 @@
+web: gunicorn BookPress.wsgi --log-file -

@@ -3,7 +3,6 @@ from django.conf import settings
 from BookStore.models import Book
 from django.db.models.signals import m2m_changed
 from simple_history.models import HistoricalRecords
-
 User = settings.AUTH_USER_MODEL
 
 
